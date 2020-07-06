@@ -37,7 +37,6 @@ module.exports = function validateProfileInput(data) {
       errors.wangyikt = 'URL不合法';
     }
   }
-
   return {
     errors,
     isValid: isEmpty(errors)
