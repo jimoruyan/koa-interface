@@ -55,13 +55,13 @@ router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
   async ctx => {
-
     const { errors, isValid } = validateProfileInput(ctx.request.body);
 
     // 判断是否验证通过
     if (!isValid) {
       ctx.status = 400;
       ctx.body = errors;
+
       return;
     }
 
@@ -123,7 +123,7 @@ router.post(
 router.get('/handle', async ctx => {
   const errors = {};
   const handle = ctx.query.handle;
-  // console.log(handle);
+
   const profile = await Profile.find({ handle: handle }).populate('user', [
     'name',
     'avatar'
@@ -146,12 +146,12 @@ router.get('/handle', async ctx => {
  */
 router.get('/user', async ctx => {
   const errors = {};
-  const user_id = ctx.query.user_id;
+  const user_id = ctx.query.user;
+  console.log(ctx.query.user)
   const profile = await Profile.find({ user: user_id }).populate('user', [
     'name',
     'avatar'
   ]);
-  // console.log(profile);
 
   if (profile.length < 1) {
     errors.noprofile = '未找到该用户信息';

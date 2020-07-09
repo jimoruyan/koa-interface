@@ -20,7 +20,7 @@ module.exports = function validateRegisterInput(data) {
   if (!Validator.isEmail(data.email)) {
     errors.email = '邮箱不合法';
   }
-
+ 
   if (Validator.isEmpty(data.email)) {
     errors.email = '邮箱不能为空';
   }
